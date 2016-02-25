@@ -328,13 +328,14 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
             article.className = 'ac-large';
             article.appendChild(label);
 
+            if (this.options.group_height) {
+                article.style.height = this.options.group_height;
+            }
             // process options of ac-large css class - to options.group_maxHeight and group_height
             if (this.options.group_maxHeight) {
                 article.style.maxHeight = this.options.group_maxHeight;
             }
-            if (this.options.group_height) {
-                article.style.height = this.options.group_height;
-            }
+            
 
 
             groupContainer.innerHTML = inputElement + inputLabel;
