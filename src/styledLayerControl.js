@@ -11,7 +11,7 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
         groupDeleteLabel: 'Delete the group'
     },
 
-    initialize: function(baseLayers, groupedOverlays, options) {
+    initialize: function (baseLayers, groupedOverlays, options) {
         var i,
             j;
         L.Util.setOptions(this, options);
@@ -38,7 +38,7 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
 
     },
 
-    onAdd: function(map) {
+    onAdd: function (map) {
         this._initLayout();
         this._update();
 
@@ -50,32 +50,32 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
         return this._container;
     },
 
-    onRemove: function(map) {
+    onRemove: function (map) {
         map
             .off('layeradd', this._onLayerChange)
             .off('layerremove', this._onLayerChange);
     },
 
-    addBaseLayer: function(layer, name, group) {
+    addBaseLayer: function (layer, name, group) {
         this._addLayer(layer, name, group, false);
         this._update();
         return this;
     },
 
-    addOverlay: function(layer, name, group) {
+    addOverlay: function (layer, name, group) {
         this._addLayer(layer, name, group, true);
         this._update();
         return this;
     },
 
-    removeLayer: function(layer) {
+    removeLayer: function (layer) {
         var id = L.Util.stamp(layer);
         delete this._layers[id];
         this._update();
         return this;
     },
 
-    removeGroup: function(group_Name, del) {
+    removeGroup: function (group_Name, del) {
         for (group in this._groupList) {
             if (this._groupList[group].groupName == group_Name) {
                 for (layer in this._layers) {
@@ -93,40 +93,40 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
         }
     },
 
-    removeAllGroups: function(del) {
+    removeAllGroups: function (del) {
         for (group in this._groupList) {
-                for (layer in this._layers) {
-                    if (this._layers[layer].group && this._layers[layer].group.removable) {
-                        if (del) {
-                            this._map.removeLayer(this._layers[layer].layer);
-                        }
-                        delete this._layers[layer];
+            for (layer in this._layers) {
+                if (this._layers[layer].group && this._layers[layer].group.removable) {
+                    if (del) {
+                        this._map.removeLayer(this._layers[layer].layer);
                     }
+                    delete this._layers[layer];
                 }
-                delete this._groupList[group];
+            }
+            delete this._groupList[group];
         }
         this._update();
     },
 
-    selectLayer: function(layer) {
+    selectLayer: function (layer) {
         this._map.addLayer(layer);
         this._update();
     },
 
-    unSelectLayer: function(layer) {
+    unSelectLayer: function (layer) {
         this._map.removeLayer(layer);
         this._update();
     },
 
-    selectGroup: function(group_Name) {
+    selectGroup: function (group_Name) {
         this.changeGroup(group_Name, true)
     },
 
-    unSelectGroup: function(group_Name) {
+    unSelectGroup: function (group_Name) {
         this.changeGroup(group_Name, false)
     },
 
-    changeGroup: function(group_Name, select) {
+    changeGroup: function (group_Name, select) {
         for (group in this._groupList) {
             if (this._groupList[group].groupName == group_Name) {
                 for (layer in this._layers) {
@@ -144,8 +144,7 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
         this._update();
     },
 
-
-    _initLayout: function() {
+    _initLayout: function () {
         var className = 'leaflet-control-layers',
             container = this._container = L.DomUtil.create('div', className);
 
@@ -209,10 +208,9 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
         }
 
         window.onresize = this._on_resize_window.bind(this);
-
     },
 
-    _on_resize_window: function() {
+    _on_resize_window: function () {
         // listen to resize of screen to reajust de maxHeight of container
         for (var c = 0; c < containers.length; c++) {
             // input the new value to height
@@ -221,14 +219,14 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
     },
 
     // remove the px from a css value and convert to a int
-    _removePxToInt: function(value) {
+    _removePxToInt: function (value) {
         if (typeof value === 'string') {
             return parseInt(value.replace("px", ""));
         }
         return value;
     },
 
-    _addLayer: function(layer, name, group, overlay) {
+    _addLayer: function (layer, name, group, overlay) {
         var id = L.Util.stamp(layer);
 
         this._layers[id] = {
@@ -268,7 +266,7 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
         }
     },
 
-    _update: function() {
+    _update: function () {
         if (!this._container) {
             return;
         }
@@ -291,10 +289,9 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
             overlaysPresent = overlaysPresent || obj.overlay;
             baseLayersPresent = baseLayersPresent || !obj.overlay;
         }
-
     },
 
-    _onLayerChange: function(e) {
+    _onLayerChange: function (e) {
         var obj = this._layers[L.Util.stamp(e.layer)];
 
         if (!obj) {
@@ -316,11 +313,11 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
         }
     },
 
-    _onZoomEnd: function(e) {
+    _onZoomEnd: function (e) {
         this._checkIfDisabled();
     },
 
-    _checkIfDisabled: function(layers) {
+    _checkIfDisabled: function (layers) {
         var currentZoom = this._map.getZoom();
 
         for (layerId in this._layers) {
@@ -336,7 +333,7 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
     },
 
     // IE7 bugs out if you create a radio dynamically, so you have to do it this hacky way (see http://bit.ly/PqYLBe)
-    _createRadioElement: function(name, checked) {
+    _createRadioElement: function (name, checked) {
 
         var radioHtml = '<input type="radio" class="leaflet-control-layers-selector" name="' + name + '"';
         if (checked) {
@@ -350,7 +347,7 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
         return radioFragment.firstChild;
     },
 
-    _addItem: function(obj) {
+    _addItem: function (obj) {
         var label = document.createElement('div'),
             input,
             checked = this._map.hasLayer(obj.layer),
@@ -381,9 +378,10 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
 
         var name = document.createElement('label');
         name.innerHTML = '<label for="' + id + '">' + obj.name + '</label>';
-
         label.appendChild(input);
         label.appendChild(name);
+
+        $(name).editable("click", this._onEditClick.bind(this));
 
         if (obj.layer.StyledLayerControl) {
 
@@ -402,7 +400,6 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
             }
 
         }
-
 
         if (obj.overlay) {
             container = this._overlaysList;
@@ -520,7 +517,7 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
         return label;
     },
 
-    _onDeleteClick: function(obj) {
+    _onDeleteClick: function (obj) {
         var node = obj.target.parentElement.childNodes[0];
         n_obj = this._layers[node.layerId];
 
@@ -538,27 +535,59 @@ L.Control.StyledLayerControl = L.Control.Layers.extend({
         return false;
     },
 
-    _onSelectGroup: function(e) {
+    _onEditClick: function (e) {
+        if (this.onLayerNameChange) {
+            if (e.old_value !== e.value) {
+
+                var isLayerAlreadyExists = false;
+                for (let i = 0; i < this._layers.length; i++) {
+                    const layer = this._layers[i];
+                    if (layer && (layer.name === e.value)) {
+                        isLayerAlreadyExists = true;
+                        break;
+                    }
+                }
+
+                if (isLayerAlreadyExists) {
+                    e.target.html(e.old_value);
+                    alert(e.value + ' layer already exists!');
+                    return;
+                }
+
+                for (let j = 0; j < this._layers.length; j++) {
+                    const layer = this._layers[j];
+                    if (layer && (layer.name === e.old_value)) {
+                        layer.name = e.value;
+                        break;
+                    }
+                }
+
+                this.onLayerNameChange(e.old_value, e.value); // db change
+            }
+        }
+    },
+
+    _onSelectGroup: function (e) {
         this.selectGroup(e.target.getAttribute("data-group-name"));
     },
 
-    _onUnSelectGroup: function(e) {
+    _onUnSelectGroup: function (e) {
         this.unSelectGroup(e.target.getAttribute("data-group-name"));
     },
 
-    _onRemoveGroup: function(e) {
+    _onRemoveGroup: function (e) {
         this.removeGroup(e.target.getAttribute("data-group-name"), true);
     },
 
-    _expand: function() {
+    _expand: function () {
         L.DomUtil.addClass(this._container, 'leaflet-control-layers-expanded');
     },
 
-    _collapse: function() {
+    _collapse: function () {
         this._container.className = this._container.className.replace(' leaflet-control-layers-expanded', '');
     }
 });
 
-L.Control.styledLayerControl = function(baseLayers, overlays, options) {
+L.Control.styledLayerControl = function (baseLayers, overlays, options) {
     return new L.Control.StyledLayerControl(baseLayers, overlays, options);
 };
