@@ -688,4 +688,6 @@ L.Control.styledLayerControl = function (baseLayers, overlays, options) {
     return new L.Control.StyledLayerControl(baseLayers, overlays, options);
 };
 
-export default L.Control.styledLayerControl;
+const styledLayerControl = L.Control.styledLayerControl;
+
+export default styledLayerControl;
