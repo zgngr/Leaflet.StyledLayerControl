@@ -1,0 +1,27 @@
+{
+  "name": "code",
+  "version": "1.0.0",
+  "description": "Leaflet.StyledLayerControl\r ===================",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zgngr/Leaflet.StyledLayerControl.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zgngr/Leaflet.StyledLayerControl/issues"
+  },
+  "homepage": "https://github.com/zgngr/Leaflet.StyledLayerControl#readme",
+  "dependencies": {
+    "jquery": "^3.3.1",
+    "leaflet": "^1.0.3"
+  }
+}
