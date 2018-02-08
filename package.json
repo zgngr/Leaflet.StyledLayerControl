@@ -1,5 +1,5 @@
 {
-  "name": "code",
+  "name": "leaflet-styledLayerControl",
   "version": "1.0.0",
   "description": "Leaflet.StyledLayerControl\r ===================",
   "main": "src/styledLayerControl.js",
@@ -22,6 +22,6 @@
   "homepage": "https://github.com/zgngr/Leaflet.StyledLayerControl#readme",
   "dependencies": {
     "jquery": "^3.3.1",
-    "leaflet": "^1.0.3"
+    "leaflet": "^1.1.0"
   }
 }
